@@ -10,7 +10,7 @@ cd HeavyFlavorAnalysis
 cd Onia2MuMu/test/2017
 
 voms-proxy-init -voms cms --valid 172:00
-./multicrab_2017_MinBias --crabCmd=submit <b>
+./multicrab_2017_MinBias --crabCmd=submit <p>
 ./multicrab_2017 --crabCmd=submit
 #Following script will loop over all jobs within director (crabOutput2017_)  and will keep resubmitting failing jobs after every 30 mints
 
