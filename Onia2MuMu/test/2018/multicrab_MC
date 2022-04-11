@@ -70,7 +70,9 @@ def main():
         #--------------------------------------------------------
         # This is the base config:
         #--------------------------------------------------------
-        from CRABClient.UserUtilities import config, getUsernameFromSiteDB
+        from CRABClient.UserUtilities import getUsername
+        from CRABClient.UserUtilities import config
+
         config = config()
 
         config.General.requestName = None
@@ -83,35 +85,64 @@ def main():
         config.JobType.outputFiles = ['BPHSkim.root']
 
         config.Data.inputDataset = None
-        config.Data.inputDBS = 'phys03'
+        #config.Data.inputDBS = 'phys03'
+        config.Data.inputDBS = 'global'
         config.Data.splitting = 'FileBased' #'LumiBased'
-        config.Data.unitsPerJob = 3
+        config.Data.unitsPerJob = 1
         #config.Data.totalUnits = 30
-
+  
         #config.Data.outLFNDirBase = '/store/user/%s/' % (getUsernameFromSiteDB())
         #config.Data.outLFNDirBase = '/store/group/lpcmuon/Run2017/'
-        config.Data.outLFNDirBase = '/store/group/lpcmuon/fourmuonMC'
+        config.Data.outLFNDirBase = '/store/user/muahmad/FourMuon_Analysis/Signal_ggXToJPsiJPsi_JPsiToMuMu_M6p9/'
         config.Data.publication = True
         config.Data.outputDatasetTag = None
+        #config.Data.ignoreLocality = True
+        config.JobType.allowUndistributedCMSSW = True
+        #config.Site.whitelist = ["T2_US*"]
         config.Site.storageSite = 'T3_US_FNALLPC' # Choose your site. 
         #--------------------------------------------------------
 
         # Will submit one task for each of these input datasets.
         inputDatasets = [
-'/TVPMC_13/zhenhu-MC_TVP13_LHE_RECO_01-f6fecdf3a3ed6f00e41c15ae34022bfb/USER'
-#								 '/FourMuon_UpsilonInvMassCut_MSEL5_8TeV_pythia6/Summer12DR53X-PU_RD2_START53_V19F_ext1-v1/AODSIM',
-#								 '/H0ToUps1SMuMu_m18p5_TuneCUEP8M1_13TeV-pythia8/RunIISummer17DRStdmix-NZSFlatPU28to62_92X_upgrade2017_realistic_v10-v1/AODSIM',
-								 #'/UpsilonMuMu_UpsilonPt6_TuneCUEP8M1_13TeV-pythia8-evtgen/RunIISummer17DRStdmix-NZSFlatPU28to62_92X_upgrade2017_realistic_v10-v1/AODSIM'
-                        ]
+#'/DPSToJJ_13TeV_pythia8/jinfeng-MC2018_RECO_JinfengLiu_v1-92d92f5109469f45356010fe9aa58810/USER','
+# '/JHU_JJto4mu_JJ0p6dot3total_0p/wgong-MC2017_RECO_wgong_v1-a9060a3af4d8974a100eeeda34a973c3/USER',
+# '/JHU_JJto4mu_JJ0p6dot2total_0p/wgong-MC2017_RECO_wgong_v1-a9060a3af4d8974a100eeeda34a973c3/USER',
+# '/JHU_JJto4mu_JJ0p6dot4total_0p/wgong-MC2017_RECO_wgong_v1-a9060a3af4d8974a100eeeda34a973c3/USER'
+#'/JHU_JJto4mu_0p/yangzh-MC_13TeV_RECOJJto4mu_0p_mass6dot3w1mevnoee-f6fecdf3a3ed6f00e41c15ae34022bfb/USER',
+#'/JHU_JJto4mu_0p/yangzh-MC_13TeV_RECOJJto4mu_0p_mass6dot4w1mevnoeenew-f6fecdf3a3ed6f00e41c15ae34022bfb/USER',
+#'/JHU_JJto4mu_0p/jingqing-MC_13TeV_RECO_JJto4mu_m6500-f6fecdf3a3ed6f00e41c15ae34022bfb/USER',
+#'/JHU_JJto4mu_0p/jingqing-MC_13TeV_RECO_JJto4mu_m6700-f6fecdf3a3ed6f00e41c15ae34022bfb/USER',
+#'/JHU_JJto4mu_0p/jingqing-MC_13TeV_RECO_JJto4mu_m6900-f6fecdf3a3ed6f00e41c15ae34022bfb/USER',
+#'/JHU_JJto4mu_0p/yangzh-MC_13TeV_RECOJJto4mu_0p_mass7dot1w1mevnoee-f6fecdf3a3ed6f00e41c15ae34022bfb/USER',
+#'/JHU_JJto4mu_0p/hwen-MC_13TeV_RECO_newjpsi7dot2MCwidth0_hwen-f6fecdf3a3ed6f00e41c15ae34022bfb/USER',
+#'/JHU_JJto4mu_0p/yangzh-MC_13TeV_RECOJJto4mu_0p_mass7dot3w1mevnoee-f6fecdf3a3ed6f00e41c15ae34022bfb/USER',
+#'/JHU_JJto4mu_0p/hwen-MC_13TeV_RECO_newjpsi7dot5MCwidth0_hwen-f6fecdf3a3ed6f00e41c15ae34022bfb/USER',
+#'/JHU_JJto4mu_0p/yangzh-MC_13TeV_RECOJJto4mu_0p_mass7dot7w1mevnoee-f6fecdf3a3ed6f00e41c15ae34022bfb/USER',
+#'/JHU_JJto4mu_0p/hwen-MC_13TeV_RECO_newjpsi8dot5MC_hwen-f6fecdf3a3ed6f00e41c15ae34022bfb/USER',
+#'/Chib0_6300_ToJpsiJpsi_TuneCP5_13TeV-pythia-evtgen/RunIIAutumn18DRPremix-102X_upgrade2018_realistic_v15-v1/AODSIM',
+#'/Chib0_6500_ToJpsiJpsi_TuneCP5_13TeV-pythia-evtgen/RunIIAutumn18DRPremix-102X_upgrade2018_realistic_v15-v1/AODSIM',
+#'/Chib0_6700_ToJpsiJpsi_TuneCP5_13TeV-pythia-evtgen/RunIIAutumn18DRPremix-102X_upgrade2018_realistic_v15-v1/AODSIM',
+#'/Chib0_6900_ToJpsiJpsi_TuneCP5_13TeV-pythia-evtgen/RunIIAutumn18DRPremix-102X_upgrade2018_realistic_v15-v1/AODSIM',
+#'/Chib0_7100_ToJpsiJpsi_TuneCP5_13TeV-pythia-evtgen/RunIIAutumn18DRPremix-102X_upgrade2018_realistic_v15-v1/AODSIM',
+#'/Chib0_7300_ToJpsiJpsi_TuneCP5_13TeV-pythia-evtgen/RunIIAutumn18DRPremix-102X_upgrade2018_realistic_v15-v1/AODSIM',
+#'/Chib0_7500_ToJpsiJpsi_TuneCP5_13TeV-pythia-evtgen/RunIIAutumn18DRPremix-102X_upgrade2018_realistic_v15-v1/AODSIM',
+#'/Chib0_7700_ToJpsiJpsi_TuneCP5_13TeV-pythia-evtgen/RunIIAutumn18DRPremix-102X_upgrade2018_realistic_v15-v1/AODSIM'                       ]
 
+'/ggXToJPsiJPsi_JPsiToMuMu_M6p9_Scalar_TuneCP5_13TeV-pythia8-JHUGen/RunIIAutumn18DRPremix-102X_upgrade2018_realistic_v15-v4/AODSIM'
+]
         for inDS in inputDatasets:
             # inDS is of the form /A/B/C. Since B is unique for each inDS, use this in the CRAB request name.
-            PD = inDS.split('/')[1]
-            Run = inDS.split('/')[2].split('-')[1]
-            config.General.requestName = 'BPHSkim-%s-%s-%s' % (PD, options.crabJobsVersion, Run)
-            #config.General.requestName = 'BPHSkim-%s-%s' % (PD, options.crabJobsVersion)
+            #PD = inDS.split('/')[1]
+            print inDS
+            PD = inDS.split('/')[1].split('_')[0]+'_'+inDS.split('/')[1].split('_')[1]
+            #Run = inDS.split('/')[2].split('-')[1]
+            #Run = str.split('/')[1].split('_')[0]+'_'+str.split('/')[1].split('_')[1]
+            Run = '_mass_'+inDS.split('/')[1].split('p')[1].split('total_0')[0]
+            #config.General.requestName = 'BPHSkim-%s-%s-%s' % (PD, options.crabJobsVersion, Run) # For JHU
+            config.General.requestName = 'BPHSkim-%s-%s' % (PD, options.crabJobsVersion) # for /Chib0 samples
             config.Data.inputDataset = inDS
-            config.Data.outputDatasetTag = 'BPHSkim-%s-%s' % (options.crabJobsVersion, Run)
+            #config.Data.outputDatasetTag = 'BPHSkim-%s-%s' % (options.crabJobsVersion, Run) # For JHU
+            config.Data.outputDatasetTag = 'BPHSkim-%s-%s' % (options.crabJobsVersion, PD) # for /Chib0 samples
             #config.Data.outputDatasetTag = 'BPHSkim-%s' % (options.crabJobsVersion)
 				# Submit.
             try:

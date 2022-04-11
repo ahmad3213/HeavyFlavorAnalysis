@@ -69,8 +69,8 @@ def manage():
 
         if (not opt.LOOP): break
         else: 
-            print "waiting 30 minutes..." 
-            time.sleep(60*30)
+            print "waiting 10 minutes..." 
+            time.sleep(60*10)
 
 if __name__ == "__main__": 
     manage() 
